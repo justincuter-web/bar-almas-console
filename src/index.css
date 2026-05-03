@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #fafaf9;
+  color: #1c1917;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+@media print {
+  body * { visibility: hidden; }
+  .receipt, .receipt * { visibility: visible; }
+  .receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .no-print { display: none !important; }
+}
