@@ -3,6 +3,7 @@ import Tavolo from './pages/Tavolo.jsx'
 import Bancone from './pages/Bancone.jsx'
 import Admin from './pages/Admin.jsx'
 import Seed from './pages/Seed.jsx'
+import QR from './pages/QR.jsx'
 
 function Home() {
   return (
@@ -17,7 +18,10 @@ function Home() {
         <Link to="/admin" className="rounded-2xl border border-stone-300 px-6 py-5 font-medium hover:bg-stone-100 transition">
           Admin
         </Link>
-        <Link to="/seed" className="sm:col-span-2 rounded-2xl border border-amber-300 bg-amber-50 text-amber-900 px-6 py-5 font-medium hover:bg-amber-100 transition">
+        <Link to="/qr" className="rounded-2xl border border-stone-300 px-6 py-5 font-medium hover:bg-stone-100 transition">
+          QR tavoli (stampa)
+        </Link>
+        <Link to="/seed" className="rounded-2xl border border-amber-300 bg-amber-50 text-amber-900 px-6 py-5 font-medium hover:bg-amber-100 transition">
           Seed iniziale
         </Link>
       </div>
@@ -36,6 +40,7 @@ export default function App() {
       <Route path="/bancone" element={<Bancone />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/seed" element={<Seed />} />
+      <Route path="/qr" element={<QR />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
