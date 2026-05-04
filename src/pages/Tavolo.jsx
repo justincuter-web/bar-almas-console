@@ -126,7 +126,10 @@ export default function Tavolo() {
                     <li key={p.id} className="flex items-center gap-3 py-3">
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-stone-900">{p.nome}</p>
-                        <p className="text-stone-500 text-sm tnum">{eur(p.prezzo)}</p>
+                        {p.descrizione && (
+                          <p className="text-stone-500 text-xs mt-0.5">{p.descrizione}</p>
+                        )}
+                        <p className="text-stone-700 text-sm tnum mt-0.5">{eur(p.prezzo)}</p>
                         {esaurito && <p className="text-red-600 text-xs mt-0.5">Esaurito</p>}
                       </div>
                       {q === 0 ? (

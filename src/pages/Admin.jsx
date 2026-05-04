@@ -70,7 +70,7 @@ export default function Admin() {
 }
 
 function Prodotti({ prodotti }) {
-  const empty = { nome: '', prezzo: '', categoria: 'Caffetteria', magazzino: '0', attivo: true }
+  const empty = { nome: '', descrizione: '', prezzo: '', categoria: 'Caffetteria', magazzino: '0', attivo: true }
   const [form, setForm] = useState(empty)
   const [busy, setBusy] = useState(false)
   const [editing, setEditing] = useState(null)
@@ -83,6 +83,7 @@ function Prodotti({ prodotti }) {
     setBusy(true)
     const data = {
       nome: form.nome.trim(),
+      descrizione: form.descrizione.trim(),
       prezzo: Number(form.prezzo),
       categoria: form.categoria,
       magazzino: Number(form.magazzino),
@@ -104,6 +105,7 @@ function Prodotti({ prodotti }) {
     setEditing(p.id)
     setForm({
       nome: p.nome,
+      descrizione: p.descrizione || '',
       prezzo: String(p.prezzo),
       categoria: p.categoria,
       magazzino: String(p.magazzino ?? 0),
@@ -132,6 +134,15 @@ function Prodotti({ prodotti }) {
             onChange={(e) => setForm({ ...form, nome: e.target.value })}
             className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"
             required
+          />
+        </div>
+        <div>
+          <label className="text-xs text-stone-600">Descrizione</label>
+          <input
+            value={form.descrizione}
+            onChange={(e) => setForm({ ...form, descrizione: e.target.value })}
+            placeholder="Es. Espresso tradizionale"
+            className="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"
           />
         </div>
         <div className="grid grid-cols-2 gap-2">
