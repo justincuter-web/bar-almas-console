@@ -17,10 +17,7 @@ function Home() {
         <Link to="/admin" className="rounded-2xl border border-stone-300 px-6 py-5 font-medium hover:bg-stone-100 transition">
           Admin
         </Link>
-        <Link to="/tavolo/1" className="rounded-2xl border border-stone-300 px-6 py-5 font-medium hover:bg-stone-100 transition">
-          Tavolo demo (1)
-        </Link>
-        <Link to="/seed" className="rounded-2xl border border-amber-300 bg-amber-50 text-amber-900 px-6 py-5 font-medium hover:bg-amber-100 transition">
+        <Link to="/seed" className="sm:col-span-2 rounded-2xl border border-amber-300 bg-amber-50 text-amber-900 px-6 py-5 font-medium hover:bg-amber-100 transition">
           Seed iniziale
         </Link>
       </div>

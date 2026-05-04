@@ -11,17 +11,3 @@ body {
 }
 
 .tnum { font-variant-numeric: tabular-nums; }
-
-@media print {
-  body * { visibility: hidden; }
-  .receipt, .receipt * { visibility: visible; }
-  .receipt {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    box-shadow: none !important;
-    border: none !important;
-  }
-  .no-print { display: none !important; }
-}

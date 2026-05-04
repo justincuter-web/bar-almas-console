@@ -5,7 +5,7 @@ import {
   doc, runTransaction, updateDoc, addDoc, serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '../lib/firebase.js'
-import { eur, dt, dtFull } from '../lib/format.js'
+import { eur, dt } from '../lib/format.js'
 import { playOrderBeep, unlockAudio } from '../lib/audio.js'
 
 export default function Bancone() {
@@ -14,7 +14,6 @@ export default function Bancone() {
   const [tavoli, setTavoli] = useState([])
   const [busy, setBusy] = useState({})
   const [errore, setErrore] = useState('')
-  const [stampa, setStampa] = useState(null)
   const seenRef = useRef(new Set())
   const firstSnapshotRef = useRef(true)
 
@@ -147,13 +146,6 @@ export default function Bancone() {
         righe: [],
         totale: 0,
       })
-      setStampa({
-        tavolo: tavolo.tavolo,
-        righe: tavolo.righe,
-        totale: tavolo.totale,
-        chiusoAt: new Date(),
-      })
-      setTimeout(() => window.print(), 100)
     } catch (e) {
       console.error(e)
       setErrore(e.message || 'Errore chiusura conto')
@@ -162,7 +154,7 @@ export default function Bancone() {
 
   return (
     <div className="min-h-full">
-      <header className="bg-stone-900 text-stone-50 px-6 py-4 flex items-center justify-between sticky top-0 z-10 no-print">
+      <header className="bg-stone-900 text-stone-50 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
         <div>
           <p className="text-amber-300 text-xs tracking-[0.25em] uppercase">Postazione</p>
           <h1 className="font-display text-3xl">Bancone</h1>
@@ -180,13 +172,13 @@ export default function Bancone() {
       </header>
 
       {errore && (
-        <div className="bg-red-50 border-b border-red-200 text-red-900 px-6 py-2 text-sm flex justify-between no-print">
+        <div className="bg-red-50 border-b border-red-200 text-red-900 px-6 py-2 text-sm flex justify-between">
           <span>{errore}</span>
           <button onClick={() => setErrore('')} className="underline">chiudi</button>
         </div>
       )}
 
-      <main className="px-6 py-6 grid lg:grid-cols-2 gap-6 no-print">
+      <main className="px-6 py-6 grid lg:grid-cols-2 gap-6">
         <section>
           <h2 className="font-display text-2xl mb-3">
             Ordini in arrivo <span className="text-stone-400 tnum">({ordini.length})</span>
@@ -267,7 +259,7 @@ export default function Bancone() {
                     onClick={() => chiudiConto(t)}
                     className="w-full bg-stone-900 text-stone-50 rounded-xl py-2 font-medium hover:bg-stone-800"
                   >
-                    Chiudi conto e stampa
+                    Chiudi conto
                   </button>
                 </li>
               ))}
@@ -276,33 +268,6 @@ export default function Bancone() {
         </section>
       </main>
 
-      {stampa && (
-        <div className="receipt fixed inset-0 bg-white p-8 max-w-sm mx-auto font-mono text-sm overflow-auto">
-          <h2 className="text-center font-display text-2xl mb-1">Bar</h2>
-          <p className="text-center text-xs mb-3">Scontrino non fiscale</p>
-          <p className="text-xs">Tavolo: <strong>{stampa.tavolo}</strong></p>
-          <p className="text-xs mb-2">Data: {dtFull(stampa.chiusoAt)}</p>
-          <hr className="border-dashed my-2" />
-          <ul>
-            {stampa.righe.map((r, i) => (
-              <li key={i} className="flex justify-between">
-                <span>{r.quantita}× {r.nome}</span>
-                <span>{eur(r.prezzo * r.quantita)}</span>
-              </li>
-            ))}
-          </ul>
-          <hr className="border-dashed my-2" />
-          <div className="flex justify-between font-bold text-base">
-            <span>TOTALE</span>
-            <span>{eur(stampa.totale)}</span>
-          </div>
-          <p className="text-center text-xs mt-4">Grazie!</p>
-          <div className="mt-6 no-print text-center space-x-2">
-            <button onClick={() => window.print()} className="px-4 py-2 bg-stone-900 text-white rounded-lg text-sm">Ristampa</button>
-            <button onClick={() => setStampa(null)} className="px-4 py-2 border border-stone-300 rounded-lg text-sm">Chiudi</button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
