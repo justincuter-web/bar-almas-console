@@ -76,11 +76,11 @@ export default function Tavolo() {
     }
   }
 
-  if (!tavolo || tavolo < 1 || tavolo > 12) {
+  if (!tavolo || tavolo < 1 || tavolo > 20) {
     return (
       <div className="p-8 text-center">
         <h1 className="font-display text-3xl mb-2">Tavolo non valido</h1>
-        <p className="text-stone-500 mb-4">Il numero deve essere tra 1 e 12.</p>
+        <p className="text-stone-500 mb-4">Il numero deve essere tra 1 e 20.</p>
         <Link to="/" className="text-amber-700 underline">torna alla home</Link>
       </div>
     )
