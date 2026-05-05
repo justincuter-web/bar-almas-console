@@ -5,7 +5,7 @@ import { QRCodeSVG } from 'qrcode.react'
 export default function QR() {
   const defaultBase = typeof window !== 'undefined' ? window.location.origin : ''
   const [base, setBase] = useState(defaultBase)
-  const [n, setN] = useState(20)
+  const [n, setN] = useState(12)
 
   const tavoli = useMemo(() => Array.from({ length: n }, (_, i) => i + 1), [n])
 

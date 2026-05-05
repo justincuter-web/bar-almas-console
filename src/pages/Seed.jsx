@@ -34,8 +34,8 @@ export default function Seed() {
   }
 
   const inizializzaTavoli = async () => {
-    aggiungi('> Inizializzo 20 tavoli…')
-    for (let n = 1; n <= 20; n++) {
+    aggiungi('> Inizializzo 12 tavoli…')
+    for (let n = 1; n <= 12; n++) {
       await setDoc(
         doc(db, 'tavoli', String(n)),
         { tavolo: n, righe: [], totale: 0, aperto: false, chiusoAt: null },
